@@ -8,7 +8,9 @@ public class ValidateFunction {
 
     static {
         functionList.put("Larger", new LargerValidate());
+        functionList.put("Less", new LessValidate());
         functionList.put("Equal", new EqualValidate());
+        functionList.put("NotNull", new NotNullValidate());
     }
 
     public static ValidateFunction getFunction(String name) {

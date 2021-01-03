@@ -1,17 +1,20 @@
 package com.company;
 import com.company.Annotation.Equal;
 import com.company.Annotation.Larger;
+import com.company.Annotation.Less;
+import com.company.Annotation.NotNull;
 
 public class Person {
-    @Larger(value = 50)
-    private int ID;
+    @Less(value = 50)
+    private float ID;
 
     @Equal(value = 18)
     private int age;
 
+    @NotNull()
     private String name;
 
-    public int getID() {
+    public float getID() {
         return ID;
     }
 
