@@ -20,7 +20,7 @@ public class ValidateFunction {
         }
     }
 
-    public Boolean isValid(Object[] args) {
+    public Boolean isValid(Object value, Object[] attribute) {
         return true;
     };
 }

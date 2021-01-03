@@ -7,10 +7,14 @@ public class Main {
 
         a.setID(100);
         a.setAge(10);
-        System.out.println(a.getID() + " " + a.getAge());
+        a.setName("Minh");
 
         ValidateManager manager = new ValidateManager();
-        manager.validate(a);
-
+        if (manager.validate(a)) {
+            a.toString();
+        }
+        else {
+            System.out.println(manager.getMessages());
+        }
     }
 }
