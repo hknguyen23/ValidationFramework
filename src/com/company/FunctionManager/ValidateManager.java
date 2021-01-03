@@ -1,4 +1,4 @@
-package com.company;
+package com.company.FunctionManager;
 
 import com.company.Annotation.Equal;
 import com.company.Annotation.Larger;
@@ -37,6 +37,20 @@ public class ValidateManager {
 
                 // check annotation of field
                 Annotation[] anno = field.getDeclaredAnnotations();
+
+                // create chain of processor
+                if (anno.length != 0) {
+                    Processor proc = new Processor(anno[0]);
+                    for (int i = 1; i < anno.length; i++) {
+                        proc.add(new Processor(anno[i]));
+                    }
+
+                    String result = proc.execute(field, object);
+                    if (!result.equals("Valid")) {
+                        this.messages.add(field.getName() + ": " + result + "\n");
+                    }
+                }
+                /*
                 if (anno.length != 0) {
                     Class<? extends Annotation> type = anno[0].annotationType();
 
@@ -56,16 +70,17 @@ public class ValidateManager {
                         try {
                             Boolean result = temp.isValid(field.get(object), attributes);
                             if (result) {
-                                this.messages.add(field.getName() + " is valid\n");
+                                this.messages.add(field.getName() + ": Valid\n");
                             } else {
-                                this.messages.add(field.getName() + " isn't valid\n");
+                                this.messages.add(field.getName() + ": Not Valid\n");
                             }
                         }
                         catch (Exception e) {
-                            this.messages.add(field.getName() + " has unexpected error: " + e.getMessage() + '\n');
+                            this.messages.add(field.getName() + ": Unexpected Error: " + e.getMessage() + '\n');
                         }
                     }
                 }
+                 */
             }
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
