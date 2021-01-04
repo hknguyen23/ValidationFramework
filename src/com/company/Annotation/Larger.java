@@ -9,5 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Larger {
     public int value();
+    public String message() default "Not Valid";
 }
 

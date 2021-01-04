@@ -7,5 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface EmailCustom {
+public @interface Regex {
+    public String value();
+    public String message() default "Not Valid";
 }

@@ -14,6 +14,8 @@ public class ValidateFunction {
         functionList.put("NotBlank", new NotBlankValidate());
         functionList.put("NotEmpty", new NotEmptyValidate());
         functionList.put("Email", new EmailValidate());
+        functionList.put("Regex", new RegexValidate());
+
     }
 
     public static ValidateFunction getFunction(String name) {
@@ -34,5 +36,8 @@ public class ValidateFunction {
 
     public Boolean isValid(Object value, Object[] attribute) {
         return true;
+    };
+    public String getMessage(Object[] attribute) {
+        return (String) attribute[attribute.length - 1];
     };
 }

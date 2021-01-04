@@ -10,7 +10,7 @@ public class Person {
     @Less(value = 50)
     private int age;
 
-    @NotBlank
+    @NotBlank(message = "Name must not be blank")
     private String name;
 
     @Email(value = "[a-zA-Z0-9._%+-]*}")

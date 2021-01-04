@@ -51,7 +51,7 @@ public class Processor {
                 } else if (result) {
                     return nextInChain.execute(field, object);
                 } else {
-                    return "Not Valid";
+                    return temp.getMessage(attributes);
                 }
             } catch (Exception e) {
                 return "Error: " + e.getMessage();

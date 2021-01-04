@@ -1,6 +1,6 @@
 package com.company.Function;
 
-public class EmailValidate extends ValidateFunction {
+public class RegexValidate extends ValidateFunction {
     public Boolean isValid(Object value, Object[] attribute) {
         if (value == null) {
             return true;
