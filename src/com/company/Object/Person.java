@@ -1,8 +1,5 @@
 package com.company.Object;
-import com.company.Annotation.Equal;
-import com.company.Annotation.Larger;
-import com.company.Annotation.Less;
-import com.company.Annotation.NotNull;
+import com.company.Annotation.*;
 
 public class Person {
     @NotNull
@@ -13,8 +10,19 @@ public class Person {
     @Less(value = 50)
     private int age;
 
-    @NotNull
+    @NotBlank
     private String name;
+
+    @Email(value = "[a-zA-Z0-9._%+-]*}")
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public float getID() {
         return ID;

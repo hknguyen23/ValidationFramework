@@ -9,8 +9,9 @@ public class Main {
         Person a = new Person();
 
         a.setID(100);
-        a.setAge(51);
-        a.setName("Minh");
+        a.setAge(31);
+        a.setName(" ");
+        a.setEmail("hophanminhgmail.com");
 
         ValidateManager manager = new ValidateManager();
         if (manager.validate(a)) {
