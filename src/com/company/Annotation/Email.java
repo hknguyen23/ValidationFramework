@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Email {
     public String value() default "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
-    public String message() default "Not Valid";
+    public String message() default "Email is not valid";
 }
