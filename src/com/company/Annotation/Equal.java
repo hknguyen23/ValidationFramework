@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Equal {
     public int value();
-    public String message() default "Not Valid";
+    public String message() default "Not Equal";
 }
 

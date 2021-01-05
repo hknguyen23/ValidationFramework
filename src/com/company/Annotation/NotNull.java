@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface NotNull {
-    public String message() default "Not Valid";
+    public String message() default "Should not be null";
 }
 

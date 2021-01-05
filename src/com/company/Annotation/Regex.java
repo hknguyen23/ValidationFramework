@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Regex {
     public String value();
-    public String message() default "Not Valid";
+    public String message() default "Not Valid Regrex";
 }
