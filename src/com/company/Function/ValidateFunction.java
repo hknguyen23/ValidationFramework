@@ -2,7 +2,7 @@ package com.company.Function;
 
 import java.util.HashMap;
 
-public class ValidateFunction {
+public class ValidateFunction implements Cloneable {
 
     private static HashMap <String, ValidateFunction> functionList = new HashMap<String, ValidateFunction>();
 
@@ -18,20 +18,17 @@ public class ValidateFunction {
 
     }
 
-    public static ValidateFunction getFunction(String name) {
+    public static ValidateFunction getFunction(String name) throws CloneNotSupportedException {
         if (functionList.containsKey(name)) {
-            return functionList.get(name);
+            return (ValidateFunction) functionList.get(name).clone();
         }
         else {
             return null;
         }
     }
 
-    public static boolean isAnnotationExisted(String name){
-        if(functionList.containsKey(name)){
-            return true;
-        }
-        return false;
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
     }
 
     public Boolean isValid(Object value, Object[] attribute) {

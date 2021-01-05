@@ -25,7 +25,7 @@ public class Processor {
         }
     }
 
-    public String execute(Field field, Object object) throws InvocationTargetException, IllegalAccessException {
+    public String execute(Field field, Object object) throws InvocationTargetException, IllegalAccessException, CloneNotSupportedException {
         field.setAccessible(true);
 
 
