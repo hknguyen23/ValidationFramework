@@ -8,11 +8,11 @@ public class Main {
     public static void main(String[] args) {
         Person a = new Person();
 
-        a.setID(101);
-        a.setAge(31);
-        a.setName(" ");
+        a.setID(201);
+        a.setAge(51);
+        a.setName("abcd");
         a.setEmail("hophanminhgmail@gmail.com");
-        a.setIDSerialNumber("         ");
+        a.setIDSerialNumber("123456789");
 
         ValidateManager manager = new ValidateManager();
         if (manager.validate(a)) {

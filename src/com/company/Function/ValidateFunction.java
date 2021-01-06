@@ -19,6 +19,7 @@ public class ValidateFunction implements Cloneable {
     functionList.put("Regex", new RegexValidate());
     functionList.put("Length", new LengthValidate());
     functionList.put("Digit", new DigitValidate());
+    functionList.put("Size", new SizeValidate());
   }
 
   public static ValidateFunction getFunction(String name) throws CloneNotSupportedException {
