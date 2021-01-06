@@ -8,8 +8,7 @@ public class Person {
     private int ID;
 
     @NotNull
-    @Larger(value = 18)
-    @Less(value = 50)
+    @Size(min = 18, max = 50, message = "Must be between 18 and 50")
     private int age;
 
     @NotBlank(message = "Name must not be blank")
