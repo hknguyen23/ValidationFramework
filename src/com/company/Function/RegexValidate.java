@@ -1,10 +1,12 @@
 package com.company.Function;
 
+import com.company.FunctionManager.AttributeObject;
+
 public class RegexValidate extends ValidateFunction {
-    public Boolean isValid(Object value, Object[] attribute) {
+    public Boolean isValid(Object value, AttributeObject attribute) {
         if (value == null) {
             return true;
         }
-        return value.toString().matches(attribute[0].toString());
+        return value.toString().matches(attribute.getAttribute("value").toString());
     }
 }

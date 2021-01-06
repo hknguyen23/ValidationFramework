@@ -1,5 +1,6 @@
 package com.company.FunctionManager;
 
+import com.company.Annotation.CustomFunction;
 import com.company.Function.ValidateFunction;
 
 import java.lang.annotation.Annotation;
@@ -25,7 +26,7 @@ public class Processor {
         }
     }
 
-    public String execute(Field field, Object object) throws InvocationTargetException, IllegalAccessException, CloneNotSupportedException {
+    public String execute(Field field, Object object) throws InvocationTargetException, IllegalAccessException, CloneNotSupportedException, ClassNotFoundException, NoSuchMethodException, InstantiationException {
         field.setAccessible(true);
 
 
@@ -36,28 +37,87 @@ public class Processor {
 
         // get value of annotation's attribute
         Method[] methods = type.getDeclaredMethods();
-        Object[] attributes = new Object[methods.length];
+
+        AttributeObject AttributeManager = new AttributeObject();
         for (int i = 0; i < methods.length; i++) {
-            attributes[i] = methods[i].invoke(this.annotation, (Object[]) null);
+            Object attribute = methods[i].invoke(this.annotation, (Object[]) null);
+            AttributeManager.setAttribute(methods[i].getName(), attribute);
         }
 
         // get function of annotation
+        String message = "Valid";
         ValidateFunction temp = ValidateFunction.getFunction(AnnotationName);
         if (temp != null) {
             try {
-                Boolean result = temp.isValid(field.get(object), attributes);
-                if (result && nextInChain == null) {
-                    return "Valid";
-                } else if (result) {
-                    return nextInChain.execute(field, object);
+                Boolean result = temp.isValid(field.get(object), AttributeManager);
+                if (result) {
+                    message = "Valid";
                 } else {
-                    return temp.getMessage(attributes);
+                    message = temp.getMessage(AttributeManager);
                 }
             } catch (Exception e) {
                 return "Error: " + e.getMessage();
             }
+        } else if (AttributeManager.getAttribute("validatedBy") != null) {
+            Boolean result = false;
+
+            // get class that has custom method
+            String className = (String) AttributeManager.getAttribute("validatedBy");
+            Class<?> cls = Class.forName(className);
+
+            // check if class has method with "CustonFunction" annotation
+            Method method = findAndGetCustomMethod(cls, type.getSimpleName());
+            if (method != null) {
+                result = (Boolean) method.invoke(cls.getDeclaredConstructor().newInstance(), field.get(object), AttributeManager);
+                if (result == true) {
+                    message = "Valid";
+                }
+                else if (result == false){
+                    if (AttributeManager.getAttribute("message") != null) {
+                        message = (String) AttributeManager.getAttribute("message");
+                    }
+                    else {
+                        message = "Not Valid";
+                    }
+                }
+            }
+            else {
+                message = "Custom validate function not found";
+            }
+
         }
 
-        return nextInChain.execute(field, object);
+        if (nextInChain == null) {
+            return message;
+        } else if (!message.equals("Valid")) {
+            return message;
+        } else {
+            return nextInChain.execute(field, object);
+        }
+    }
+
+    private Method findAndGetCustomMethod(Class<?> cls, String annotationName) throws InvocationTargetException, IllegalAccessException {
+        // find custom function with marked annotation
+        Method validateMethod = null;
+
+        Method[] methods = cls.getDeclaredMethods();                                                 // get all method in class
+        for (int i = 0; i < methods.length; i++) {
+            Method method = methods[i];
+            Annotation annotation = method.getAnnotation(CustomFunction.class);                           // get method with "CustomFunction" annotation
+            if (annotation != null) {
+                Class<? extends Annotation> annoClass = annotation.annotationType();
+                Method[] attributes = annoClass.getDeclaredMethods();                                    // get all attribute of annotation
+                for (int j = 0; j < attributes.length; j++) {
+                    String attrName = attributes[j].getName();
+                    String attrValue = (String) attributes[j].invoke(annotation, (Object[]) null);
+                    if (attrName.equals("value") && attrValue.equals(annotationName)) {                     // check if attribute "value"
+                        return methods[i];
+                    }
+                }
+
+            }
+
+        }
+        return null;
     }
 }

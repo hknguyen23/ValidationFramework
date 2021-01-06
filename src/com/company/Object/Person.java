@@ -1,8 +1,10 @@
 package com.company.Object;
 import com.company.Annotation.*;
+import com.company.CustomAnnotation.NotNegative;
 
 public class Person {
-    @NotNull
+    @NotNegative(validatedBy = "com.company.CustomFunction.NotNegative")
+    @Larger(value = 200)
     private int ID;
 
     @NotNull
@@ -13,7 +15,7 @@ public class Person {
     @NotBlank(message = "Name must not be blank")
     private String name;
 
-    @Email(value = "[a-zA-Z0-9._%+-]*}")
+    @Email
     private String email;
 
     public String getEmail() {

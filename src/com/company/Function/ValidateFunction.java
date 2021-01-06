@@ -1,5 +1,7 @@
 package com.company.Function;
 
+import com.company.FunctionManager.AttributeObject;
+
 import java.util.HashMap;
 
 public class ValidateFunction implements Cloneable {
@@ -15,7 +17,6 @@ public class ValidateFunction implements Cloneable {
         functionList.put("NotEmpty", new NotEmptyValidate());
         functionList.put("Email", new EmailValidate());
         functionList.put("Regex", new RegexValidate());
-
     }
 
     public static ValidateFunction getFunction(String name) throws CloneNotSupportedException {
@@ -31,10 +32,10 @@ public class ValidateFunction implements Cloneable {
         return super.clone();
     }
 
-    public Boolean isValid(Object value, Object[] attribute) {
+    public Boolean isValid(Object value, AttributeObject attribute) {
         return true;
     };
-    public String getMessage(Object[] attribute) {
-        return (String) attribute[attribute.length - 1];
+    public String getMessage(AttributeObject attribute) {
+        return (String) attribute.getAttribute("message");
     };
 }
