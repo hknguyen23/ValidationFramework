@@ -1,6 +1,5 @@
 package com.company.FunctionManager;
 
-import com.company.Annotation.CustomFunction;
 import com.company.Function.ValidateFunction;
 
 import java.lang.annotation.Annotation;
@@ -67,7 +66,7 @@ public class Processor {
 
             // check if class has method with "CustonFunction" annotation
             Method method = findAndGetCustomMethod(cls, type.getSimpleName());
-            if (method != null) {
+            if (method != null && ValidateFunction.class.isAssignableFrom(cls)) {
                 result = (Boolean) method.invoke(cls.getDeclaredConstructor().newInstance(), field.get(object), AttributeManager);
                 if (result == true) {
                     message = "Valid";
@@ -96,6 +95,7 @@ public class Processor {
         }
     }
 
+
     private Method findAndGetCustomMethod(Class<?> cls, String annotationName) throws InvocationTargetException, IllegalAccessException {
         // find custom function with marked annotation
         Method validateMethod = null;
@@ -103,21 +103,12 @@ public class Processor {
         Method[] methods = cls.getDeclaredMethods();                                                 // get all method in class
         for (int i = 0; i < methods.length; i++) {
             Method method = methods[i];
-            Annotation annotation = method.getAnnotation(CustomFunction.class);                           // get method with "CustomFunction" annotation
-            if (annotation != null) {
-                Class<? extends Annotation> annoClass = annotation.annotationType();
-                Method[] attributes = annoClass.getDeclaredMethods();                                    // get all attribute of annotation
-                for (int j = 0; j < attributes.length; j++) {
-                    String attrName = attributes[j].getName();
-                    String attrValue = (String) attributes[j].invoke(annotation, (Object[]) null);
-                    if (attrName.equals("value") && attrValue.equals(annotationName)) {                     // check if attribute "value"
-                        return methods[i];
-                    }
-                }
-
+            if (method.getName().equals("isValid")) {
+                return method;
             }
-
         }
         return null;
     }
+
+
 }
