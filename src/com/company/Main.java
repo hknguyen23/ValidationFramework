@@ -9,8 +9,8 @@ public class Main {
         Person a = new Person();
 
         a.setID(201);
-        a.setAge(51);
-        a.setName("abcd");
+        a.setAge(30);
+        a.setName("ahjhjjhjhjh");
         a.setEmail("hophanminhgmail@gmail.com");
         a.setIDSerialNumber("123456789");
 
