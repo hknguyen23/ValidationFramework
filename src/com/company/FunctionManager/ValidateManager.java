@@ -1,12 +1,7 @@
 package com.company.FunctionManager;
 
-import com.company.Annotation.Equal;
-import com.company.Annotation.Larger;
-import com.company.Function.ValidateFunction;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,12 +29,12 @@ public class ValidateManager {
             for (Field field : objectClass.getDeclaredFields()) {
                 field.setAccessible(true);
 
-
                 // check annotation of field
                 Annotation[] anno = field.getDeclaredAnnotations();
 
                 // create chain of processor
                 if (anno.length != 0) {
+
                     Processor proc = new Processor(anno[0]);
                     for (int i = 1; i < anno.length; i++) {
                         proc.add(new Processor(anno[i]));

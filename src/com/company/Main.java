@@ -10,8 +10,9 @@ public class Main {
 
         a.setID(101);
         a.setAge(31);
-        //a.setName(" ");
+        a.setName(" ");
         a.setEmail("hophanminhgmail@gmail.com");
+        a.setIDSerialNumber("         ");
 
         ValidateManager manager = new ValidateManager();
         if (manager.validate(a)) {

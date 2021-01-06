@@ -18,6 +18,11 @@ public class Person {
     @Email
     private String email;
 
+    @Length(value = 9)
+    @NotBlank
+    @Digit
+    private String IDSerialNumber;
+
     public String getEmail() {
         return email;
     }
@@ -48,6 +53,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIDSerialNumber() {
+        return IDSerialNumber;
+    }
+
+    public void setIDSerialNumber(String IDSerialNumber) {
+        this.IDSerialNumber = IDSerialNumber;
     }
 
     @Override
