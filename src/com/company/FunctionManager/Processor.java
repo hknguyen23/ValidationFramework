@@ -1,6 +1,7 @@
 package com.company.FunctionManager;
 
 import com.company.Function.ValidateFunction;
+import com.company.Object.Person;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -18,6 +19,11 @@ public class Processor {
     }
 
     public void add(Processor next) {
+
+        Class aClass = Person.class;
+
+        Annotation[] anno = aClass.getAnnotations();
+
         if (nextInChain == null) {
             nextInChain = next;
         } else {

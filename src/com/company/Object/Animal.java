@@ -5,7 +5,7 @@ import com.company.validationStrategy.FailFastValidationStrategy;
 import com.company.validationStrategy.NormalValidationStrategy;
 
 @ValidationStrategy(FailFastValidationStrategy.class)
-public class Person {
+public class Animal {
     @NotNegative(validatedBy = "com.company.CustomFunction.NotNegative")
     @Larger(value = 200)
     private int ID;
