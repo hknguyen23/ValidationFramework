@@ -8,7 +8,7 @@ public class Person {
     private int ID;
 
     @NotNull
-    @Size(min = 18, max = 50, message = "Must be between 18 and 50")
+    @Size(min = 18, max = 50)
     private int age;
 
     @NotBlank(message = "Name must not be blank")
@@ -22,6 +22,12 @@ public class Person {
     @NotBlank
     @Digit
     private String IDSerialNumber;
+
+    @Password(min = 4, max = 10, isContainLetter = true)
+    private String password;
+
+    @CheckDate(dateFormat = "dd/MM/yyyy")
+    private String dateOfBirth;
 
     public String getEmail() {
         return email;
@@ -61,6 +67,22 @@ public class Person {
 
     public void setIDSerialNumber(String IDSerialNumber) {
         this.IDSerialNumber = IDSerialNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
