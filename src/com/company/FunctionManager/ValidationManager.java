@@ -5,12 +5,18 @@ import com.company.validationStrategy.FailFastValidationStrategy;
 import com.company.validationStrategy.NormalValidationStrategy;
 import com.company.validationStrategy.ValidationStrategy;
 
+import java.util.HashMap;
 import java.util.List;
 
-public class ValidationManager { // context
+public class ValidationManager {
 
 	private ValidationStrategy strategy = null;
-	//private List<String> messages = new ArrayList<>();
+	private static HashMap<ValidatorStrategy, ValidationStrategy> list = new HashMap<>();
+
+	static {
+		list.put(ValidatorStrategy.NORMAL_VALIDATOR, NormalValidationStrategy.getInstance());
+		list.put(ValidatorStrategy.FAST_VALIDATOR, FailFastValidationStrategy.getInstance());
+	}
 
 	public static ValidationManager createValidatorStrategyByName(String nameStrategy){
 		ValidationManager validationManager = new ValidationManager();
@@ -32,27 +38,16 @@ public class ValidationManager { // context
 
 	public List<String> validate(Object object) {
 		return strategy.validate(object);
-//        com.company.Annotation.ValidationStrategy annotation = object.getClass().getAnnotation(com.company.Annotation.ValidationStrategy.class);
-//        if (Objects.isNull(annotation)) {
-//            // TODO: have a default strategy
-//            return FailFastValidationStrategy.getInstance().validate(object);
-//        } else {
-//            if (annotation.value() == FailFastValidationStrategy.class) {
-//                return FailFastValidationStrategy.getInstance().validate(object);
-//            } else {
-//                return NormalValidationStrategy.getInstance().validate(object);
-//            }
-//        }
 	}
 
 
 	private static ValidationStrategy getValidationStrategy(String name){
-		if(ValidatorStrategy.FAST_VALIDATOR.equals(ValidatorStrategy.isValid(name))){
-			return FailFastValidationStrategy.getInstance();
+		ValidatorStrategy validatorStrategy = ValidatorStrategy.isValid(name);
+		if(list.containsKey(validatorStrategy)){
+			return list.get(validatorStrategy);
 		}
-		return NormalValidationStrategy.getInstance();
+		return list.get(ValidatorStrategy.NORMAL_VALIDATOR);
 	}
-
 
 	private void setStrategy(ValidationStrategy strategy) {
 		this.strategy = strategy;
