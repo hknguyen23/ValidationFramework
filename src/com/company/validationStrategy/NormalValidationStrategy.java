@@ -9,57 +9,57 @@ import java.util.List;
 import java.util.Objects;
 
 public class NormalValidationStrategy implements ValidationStrategy {
-    private static NormalValidationStrategy INSTANCE;
 
-    private static final Object LOCK = new Object();
+	private static NormalValidationStrategy instance;// singleton pattern
 
-    public static ValidationStrategy getInstance() {
-        synchronized (LOCK) {
-            if (Objects.isNull(INSTANCE)) {
-                INSTANCE = new NormalValidationStrategy();
-            }
-            return INSTANCE;
-        }
-    }
+	private static final Object LOCK = new Object();
 
-    private NormalValidationStrategy() {
-    }
+	private NormalValidationStrategy() { }
 
-    @Override
-    public List<String> validate(Object object) {
-        List<String> messages = new ArrayList<>();
-        try {
-            // check if object is null
-            if (Objects.isNull(object)) {
-                throw new Exception("The object to serialize is null");
-            }
+	public static ValidationStrategy getInstance() {
+		synchronized (LOCK) {
+			if (Objects.isNull(instance)) {
+				instance = new NormalValidationStrategy();
+			}
+			return instance;
+		}
+	}
 
-            Class<?> objectClass = object.getClass();
+	@Override
+	public List<String> validate(Object object) {
+		List<String> messages = new ArrayList<>();
+		try {
+			// check if object is null
+			if (Objects.isNull(object)) {
+				throw new Exception("The object to serialize is null");
+			}
 
-            // check each field of class
-            for (Field field : objectClass.getDeclaredFields()) {
-                field.setAccessible(true);
+			Class<?> objectClass = object.getClass();
 
-                // check annotation of field
-                Annotation[] anno = field.getDeclaredAnnotations();
+			// check each field of class
+			for (Field field : objectClass.getDeclaredFields()) {
+				field.setAccessible(true);
 
-                // create chain of processor
-                if (anno.length != 0) {
+				// check annotation of field
+				Annotation[] anno = field.getDeclaredAnnotations();
 
-                    Processor proc = new Processor(anno[0]);
-                    for (int i = 1; i < anno.length; i++) {
-                        proc.add(new Processor(anno[i]));
-                    }
+				// create chain of processor
+				if (anno.length != 0) {
 
-                    String result = proc.execute(field, object);
-                    if (!result.equals("Valid")) {
-                        messages.add(field.getName() + ": " + result + "\n");
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
-        return messages;
-    }
+					Processor proc = new Processor(anno[0]);
+					for (int i = 1; i < anno.length; i++) {
+						proc.add(new Processor(anno[i]));
+					}
+
+					String result = proc.execute(field, object);
+					if (!result.equals("Valid")) {
+						messages.add(field.getName() + ": " + result + "\n");
+					}
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("ERROR: " + e.getMessage());
+		}
+		return messages;
+	}
 }

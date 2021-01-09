@@ -10,27 +10,27 @@ import java.util.Objects;
 
 public class FailFastValidationStrategy implements ValidationStrategy {
 
-    private static FailFastValidationStrategy INSTANCE;
+    private static FailFastValidationStrategy instance;// singleton pattern
 
     private static final Object LOCK = new Object();
 
+    private FailFastValidationStrategy(){ }
+
     public static ValidationStrategy getInstance() {
         synchronized (LOCK) {
-            if (Objects.isNull(INSTANCE)) {
-                INSTANCE = new FailFastValidationStrategy();
+            if (Objects.isNull(instance)) {
+                instance = new FailFastValidationStrategy();
             }
-            return INSTANCE;
+            return instance;
         }
     }
-
-    private FailFastValidationStrategy(){}
 
     @Override
     public List<String> validate(Object object) {
         List<String> messages = new ArrayList<>();
         try {
             // clear old error message
-            messages.clear();
+            //messages.clear();
 
             // check if object is null
             if (Objects.isNull(object)) {

@@ -4,7 +4,7 @@ import com.company.CustomAnnotation.NotNegative;
 import com.company.validationStrategy.FailFastValidationStrategy;
 import com.company.validationStrategy.NormalValidationStrategy;
 
-@ValidationStrategy(FailFastValidationStrategy.class)
+//@ValidationStrategy(FailFastValidationStrategy.class)
 public class Person {
     @NotNegative(validatedBy = "com.company.CustomFunction.NotNegative")
     @Larger(value = 200)
