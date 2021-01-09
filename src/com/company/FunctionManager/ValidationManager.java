@@ -1,7 +1,6 @@
 package com.company.FunctionManager;
 
 import com.company.Constant.ValidatorStrategy;
-import com.company.Function.ValidateFunction;
 import com.company.validationStrategy.FailFastValidationStrategy;
 import com.company.validationStrategy.NormalValidationStrategy;
 import com.company.validationStrategy.ValidationStrategy;
@@ -20,11 +19,11 @@ public class ValidationManager { // context
 	}
 
 	public String getValidationStrategyName(){
-		return strategy.nameStrategy();
+		return strategy.getNameStrategy();
 	}
 
 	public String getValidationStrategyDescription(){
-		return strategy.description();
+		return strategy.getDescriptionStrategy();
 	}
 
 	public void updateStrategy(String name){
