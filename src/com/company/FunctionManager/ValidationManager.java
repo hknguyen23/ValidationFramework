@@ -8,28 +8,31 @@ import java.util.List;
 
 public class ValidationManager { // context
 
-    private ValidationStrategy strategy;
-    //private List<String> messages = new ArrayList<>();
+	private ValidationStrategy strategy = null;
+	//private List<String> messages = new ArrayList<>();
 
-    public void setStrategy(ValidationStrategy strategy) {
-        this.strategy = strategy;
-    }
+	public ValidationManager() {
+		this.strategy = NormalValidationStrategy.getInstance();
+	}
 
-    public static ValidationManager createFailFastValidator() {
-        ValidationManager validationManager = new ValidationManager();
-        validationManager.setStrategy(FailFastValidationStrategy.getInstance());
-        return validationManager;
-    }
+	public void setStrategy(ValidationStrategy strategy) {
+		this.strategy = strategy;
+	}
 
-    public static ValidationManager createNormalValidator() {
-        ValidationManager validationManager = new ValidationManager();
-        validationManager.setStrategy(NormalValidationStrategy.getInstance());
-        return validationManager;
-    }
+	public static ValidationManager createFailFastValidator() {
+		ValidationManager validationManager = new ValidationManager();
+		validationManager.setStrategy(FailFastValidationStrategy.getInstance());
+		return validationManager;
+	}
 
-    public List<String> validate(Object object) {
+	public static ValidationManager createNormalValidator() {
+		ValidationManager validationManager = new ValidationManager();
+		validationManager.setStrategy(NormalValidationStrategy.getInstance());
+		return validationManager;
+	}
 
-        return strategy.validate(object);
+	public List<String> validate(Object object) {
+		return strategy.validate(object);
 //        com.company.Annotation.ValidationStrategy annotation = object.getClass().getAnnotation(com.company.Annotation.ValidationStrategy.class);
 //        if (Objects.isNull(annotation)) {
 //            // TODO: have a default strategy
@@ -41,7 +44,7 @@ public class ValidationManager { // context
 //                return NormalValidationStrategy.getInstance().validate(object);
 //            }
 //        }
-    }
+	}
 
 }
 
