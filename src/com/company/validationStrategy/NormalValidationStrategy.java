@@ -62,4 +62,14 @@ public class NormalValidationStrategy implements ValidationStrategy {
 		}
 		return messages;
 	}
+
+	@Override
+	public String nameStrategy() {
+		return "Normal validation";
+	}
+
+	@Override
+	public String description() {
+		return "Check all the validation applied.";
+	}
 }

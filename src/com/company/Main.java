@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.Constant.ValidatorStrategy;
 import com.company.FunctionManager.ValidationManager;
 import com.company.Object.Animal;
 import com.company.Object.Person;
@@ -16,7 +17,11 @@ public class Main {
 		person.setEmail("hophanminhgmail@gmail.com");
 		person.setIDSerialNumber("         ");
 
-		ValidationManager manager = ValidationManager.createNormalValidator();
+		// Right input --> depend on input
+//		ValidationManager manager = ValidationManager.createValidatorStrategyByName(ValidatorStrategy.NORMAL_VALIDATOR.name());
+		// Wrong input --> normal
+		ValidationManager manager = ValidationManager.createValidatorStrategyByName("abcde");
+
 //        if (manager.validate(person)) {
 //            person.toString();
 //        }
@@ -24,13 +29,20 @@ public class Main {
 //            System.out.println(manager.getMessages());
 //        }
 
+		System.out.println("Using validation strategy: " + manager.getValidationStrategyName());
+		System.out.println("Description: " + manager.getValidationStrategyDescription());
 		List<String> personValidationErrors = manager.validate(person);
 		if (personValidationErrors.isEmpty()) {
 			System.out.println("person = " + person);
 		} else {
-			System.out.println("validationErrors = " + personValidationErrors);
+			System.out.println("validationErrors = \n" + personValidationErrors);
 		}
 
+		System.out.println();
+		System.out.println();
+		manager.updateStrategy(ValidatorStrategy.NORMAL_VALIDATOR.name());
+		System.out.println("Using validation strategy: " + manager.getValidationStrategyName());
+		System.out.println("Description: " + manager.getValidationStrategyDescription());
 		Animal animal = new Animal();
 		animal.setID(199);
 		animal.setAge(31);
@@ -41,7 +53,7 @@ public class Main {
 		if (validationErrors.isEmpty()) {
 			System.out.println("person = " + person);
 		} else {
-			System.out.println("validationErrors = " + validationErrors);
+			System.out.println("validationErrors = \n" + validationErrors);
 		}
 
 	}
