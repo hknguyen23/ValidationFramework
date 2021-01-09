@@ -28,7 +28,13 @@ public class PasswordValidate extends ValidateFunction {
         int min = (int)attribute.getAttribute("min");
         int max = (int)attribute.getAttribute("max");
         boolean isContainLetter = (boolean)attribute.getAttribute("isContainLetter");
-        setMessage(attribute, "Password length must be between " + min + " and " + max +
+
+        String message = (String)attribute.getAttribute("message");
+        if (!message.equals("Password invalid")) {
+            // check if not equal to default
+            setMessage(attribute, message);
+        }
+        else setMessage(attribute, "Password length must be between " + min + " and " + max +
                 (isContainLetter ? " and must contain at least a letter" : ""));
         return value == null || validate((String)value, min, max, isContainLetter);
     }

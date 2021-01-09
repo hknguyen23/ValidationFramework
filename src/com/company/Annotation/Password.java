@@ -11,5 +11,5 @@ public @interface Password {
     public int min() default 6;
     public int max() default 15;
     public boolean isContainLetter() default false;
-    public String message() default "Password length must be between 6 and 15";
+    public String message() default "Password invalid";
 }
