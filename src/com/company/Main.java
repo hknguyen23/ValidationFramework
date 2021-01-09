@@ -11,11 +11,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		Person person = new Person();
-		person.setID(101);
+		person.setID(201);
 		person.setAge(31);
-		person.setName(" ");
+		person.setName("Minhhhhhhhh");
 		person.setEmail("hophanminhgmail@gmail.com");
-		person.setIDSerialNumber("         ");
+		person.setIDSerialNumber("001712592");
 
 		// Right input --> depend on input
 //		ValidationManager manager = ValidationManager.createValidatorStrategyByName(ValidatorStrategy.NORMAL_VALIDATOR.name());

@@ -15,7 +15,7 @@ public class Person {
     private int age;
 
     @NotBlank(message = "Name must not be blank")
-    @Size(min = 2, max = 10, message = "SIZE")
+    @Size(min = 2, max = 10)
     private String name;
 
     @Email

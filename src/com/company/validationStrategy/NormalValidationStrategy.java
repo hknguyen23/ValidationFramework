@@ -64,12 +64,12 @@ public class NormalValidationStrategy implements ValidationStrategy {
 	}
 
 	@Override
-	public String nameStrategy() {
+	public String getNameStrategy() {
 		return "Normal validation";
 	}
 
 	@Override
-	public String description() {
+	public String getDescriptionStrategy() {
 		return "Check all the validation applied.";
 	}
 }

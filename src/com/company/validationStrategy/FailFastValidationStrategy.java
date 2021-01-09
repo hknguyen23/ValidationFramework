@@ -68,12 +68,12 @@ public class FailFastValidationStrategy implements ValidationStrategy {
     }
 
     @Override
-    public String nameStrategy() {
+    public String getNameStrategy() {
         return "Fast validation.";
     }
 
     @Override
-    public String description() {
+    public String getDescriptionStrategy() {
         return "Fast validation will return error immediately when first meet an invalid field.";
     }
 }
