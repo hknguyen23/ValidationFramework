@@ -15,18 +15,18 @@ public class Person {
     private int age;
 
     @NotBlank(message = "Name must not be blank")
-    @Size(min = 2, max = 10)
+    @Size(min = 2, max = 10, message = "SIZE")
     private String name;
 
     @Email
     private String email;
 
-    @Length(value = 9)
+    @Length(value = 9, message = "LENGTH")
     @NotBlank
     @Digit
     private String IDSerialNumber;
 
-    @Password(min = 4, max = 10, isContainLetter = true)
+    @Password(min = 4, max = 10, isContainLetter = true, message = "PASSWORD")
     private String password;
 
     @CheckDate(dateFormat = "dd/MM/yyyy")
