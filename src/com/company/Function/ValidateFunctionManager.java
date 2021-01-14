@@ -4,7 +4,7 @@ import com.company.FunctionManager.AttributeObject;
 
 import java.util.HashMap;
 
-public class ValidateFunctionFactory {
+public class ValidateFunctionManager {
     private static HashMap<String, ValidateFunction> functionList = new HashMap<String, ValidateFunction>();
     static {
         functionList.put("Larger", new LargerValidate());

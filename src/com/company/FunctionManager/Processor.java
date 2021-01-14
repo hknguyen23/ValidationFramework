@@ -1,7 +1,7 @@
 package com.company.FunctionManager;
 
 import com.company.Function.ValidateFunction;
-import com.company.Function.ValidateFunctionFactory;
+import com.company.Function.ValidateFunctionManager;
 import com.company.Object.Person;
 
 import java.lang.annotation.Annotation;
@@ -52,7 +52,7 @@ public class Processor {
 
         // get function of annotation
         String message = "Valid";
-        ValidateFunction temp = ValidateFunctionFactory.getFunction(AnnotationName);
+        ValidateFunction temp = ValidateFunctionManager.getFunction(AnnotationName);
         if (temp != null) {
             try {
                 Boolean result = temp.isValid(field.get(object), AttributeManager);
