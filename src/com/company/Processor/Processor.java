@@ -1,7 +1,8 @@
-package com.company.FunctionManager;
+package com.company.Processor;
 
 import com.company.Function.ValidateFunction;
 import com.company.Function.ValidateFunctionManager;
+import com.company.FunctionManager.AttributeObject;
 import com.company.Object.Person;
 
 import java.lang.annotation.Annotation;
@@ -9,10 +10,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class Processor {
-    private static int nextID = 1;
-    private int id = nextID++;
-    private Processor nextInChain;
+public class Processor extends BaseProcessor {
     private Annotation annotation;
 
     public Processor(Annotation annotation) {
@@ -102,7 +100,6 @@ public class Processor {
         }
     }
 
-
     private Method findAndGetCustomMethod(Class<?> cls, String annotationName) throws InvocationTargetException, IllegalAccessException {
         // find custom function with marked annotation
         Method validateMethod = null;
@@ -116,6 +113,4 @@ public class Processor {
         }
         return null;
     }
-
-
 }

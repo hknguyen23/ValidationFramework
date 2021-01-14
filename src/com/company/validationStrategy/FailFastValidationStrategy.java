@@ -1,6 +1,7 @@
 package com.company.validationStrategy;
 
-import com.company.FunctionManager.Processor;
+import com.company.Processor.BaseProcessor;
+import com.company.Processor.Processor;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -49,7 +50,7 @@ public class FailFastValidationStrategy implements ValidationStrategy {
                 // create chain of processor
                 if (anno.length != 0) {
 
-                    Processor proc = new Processor(anno[0]);
+                    BaseProcessor proc = new Processor(anno[0]);
                     for (int i = 1; i < anno.length; i++) {
                         proc.add(new Processor(anno[i]));
                     }
