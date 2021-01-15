@@ -6,31 +6,34 @@ import com.company.validationStrategy.NormalValidationStrategy;
 
 //@ValidationStrategy(FailFastValidationStrategy.class)
 public class Person {
+    @NotNull
     @NotNegative(validatedBy = "com.company.CustomFunction.NotNegative")
-    @Larger(value = 200)
+    @Larger(value = 1000, message = "ID must be larger than 1000")
     private int ID;
 
-    @NotNull
-    @Size(min = 18, max = 50)
-    private int age;
-
-    @NotBlank(message = "Name must not be blank")
+    @NotBlank
     @Size(min = 2, max = 10)
     private String name;
 
+    @Size(min = 18, max = 50)
+    private int age;
+
+    @NotBlank
     @Email
     private String email;
 
-    @Length(value = 9, message = "LENGTH")
+    @Length(value = 9, message = "Value's length must be 9")
     @NotBlank
     @Digit
     private String IDSerialNumber;
 
-    @Password(min = 4, max = 10, isContainLetter = true, message = "PASSWORD")
-    private String password;
-
     @CheckDate(dateFormat = "dd/MM/yyyy")
     private String dateOfBirth;
+
+    @NotBlank
+    @Password(min = 4, max = 10, isContainLetter = true, message = "Value's length must be between 4 and 10 characters")
+    private String password;
+
 
     public String getEmail() {
         return email;

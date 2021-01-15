@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Person</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Registery Form</h1>
+
+<!--
+   In Thymeleaf the equivalent of
+   JSP's ${pageContext.request.contextPath}/edit.html
+   would be @{/edit.html}
+   -->
+
+<form th:action="@{/addPerson}"
+      th:object="${personForm}" method="POST">
+    <div style="width: 60%; display: inline-block">
+        <div style="float: left; width:30%; text-align: right;">
+            (*) ID:
+        </div>
+        <div style="float: right; width:70%; text-align: left">
+            <input type="number" th:field="*{ID}" value="0"/>
+        </div>
+    </div>
+
+    <div style="width: 60%; display: inline-block; ">
+        <div style="float: left; width:30%; text-align: right;">
+            (*) Name:
+        </div>
+        <div style="float: right; width:70%; text-align: left">
+            <input type="text" th:field="*{name}"/>
+        </div>
+    </div>
+    <div style="width: 60%; display: inline-block">
+        <div style="float: left; width:30%; text-align: right;">
+            Age:
+        </div>
+        <div style="float: right; width:70%; text-align: left">
+            <input type="number" th:field="*{age}"/>
+        </div>
+    </div>
+    <div style="width: 60%; display: inline-block">
+        <div style="float: left; width:30%; text-align: right;">
+            (*) Email:
+        </div>
+        <div style="float: right; width:70%; text-align: left">
+            <input type="text" th:field="*{email}"/>
+        </div>
+    </div>
+
+    <div style="width: 60%; display: inline-block;">
+        <div style="float: left; width:30%; text-align: right; ">
+            (*) ID serial number:
+        </div>
+        <div style="float: right; width:70%; text-align: left">
+            <input type="text" th:field="*{IDSerialNumber}"/>
+        </div>
+    </div>
+
+    <div style="width: 60%; display: inline-block;">
+        <div style="float: left; width:30%; text-align: right; ">
+            Date of birth:
+        </div>
+        <div style="float: right; width:70%; text-align: left">
+            <input type="text" th:field="*{dateOfBirth}"/>
+        </div>
+    </div>
+
+    <div style="width: 60%; display: inline-block;">
+        <div style="float: left; width:30%; text-align: right; ">
+            (*)  Password:
+        </div>
+        <div style="float: right; width:70%; text-align: left">
+            <input type="text" th:field="*{password}"/>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <div style="width:40%; text-align: center">
+        <input type="submit" value="Submit"/>
+    </div>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+<table th:if="${errorMessages}" style="color: red; font-style:italic; font-weight:bold">
+    <th:block th:each="message : ${errorMessages}">
+        <tr>
+            <td th:utext="${message}">...</td>
+        </tr>
+    </th:block>
+
+</table>
+<div th:if="${successMessage}" th:utext="${successMessage}"
+     style="color:green;font-style:italic; font-weight:bold">
+    ...
+</div>
+
+</body>
+</html>
