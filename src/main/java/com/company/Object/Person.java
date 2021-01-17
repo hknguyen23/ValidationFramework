@@ -11,26 +11,26 @@ public class Person {
     @Larger(value = 1000, message = "ID must be larger than 1000")
     private int ID;
 
-    @NotBlank
+    @NotBlank(message = "This is a required field")
     @Size(min = 2, max = 10)
     private String name;
 
     @Size(min = 18, max = 50)
     private int age;
 
-    @NotBlank
+    @NotBlank(message = "This is a required field")
     @Email
     private String email;
 
+    @NotBlank(message = "This is a required field")
     @Length(value = 9, message = "Value's length must be 9")
-    @NotBlank
     @Digit
     private String IDSerialNumber;
 
     @CheckDate(dateFormat = "dd/MM/yyyy")
     private String dateOfBirth;
 
-    @NotBlank
+    @NotBlank(message = "This is a required field")
     @Password(min = 4, max = 10, isContainLetter = true, message = "Value's length must be between 4 and 10 characters")
     private String password;
 

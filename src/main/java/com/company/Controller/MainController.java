@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 public class MainController {
 
-	ValidationManager manager = ValidationManager.createValidatorStrategyByName(ValidatorStrategy.FAST_VALIDATOR.name());
+	ValidationManager manager = ValidationManager.createValidatorStrategyByName(ValidatorStrategy.NORMAL_VALIDATOR.name());
 
 	@RequestMapping(value = {"/addPerson"}, method = RequestMethod.GET)
 	public String showAddPersonPage(Model model) {
@@ -30,8 +30,6 @@ public class MainController {
 	public String savePerson(Model model, //
 	                         @ModelAttribute("personForm") PersonForm personForm) {
 
-//		String firstName = personForm.getFirstName();
-//		String lastName = personForm.getLastName();
 		Person newPerson = new Person();
 		newPerson.setAge(personForm.getAge());
 		newPerson.setDateOfBirth(personForm.getDateOfBirth());
