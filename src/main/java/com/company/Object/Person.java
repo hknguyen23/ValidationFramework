@@ -31,7 +31,7 @@ public class Person {
     private String dateOfBirth;
 
     @NotBlank(message = "This is a required field")
-    @Password(min = 4, max = 10, isContainLetter = true, message = "Value's length must be between 4 and 10 characters and contains some letters")
+    @Password(min = 4, max = 10, isContainLetter = true)
     private String password;
 
 
