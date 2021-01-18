@@ -15,7 +15,8 @@ import java.util.List;
 @Controller
 public class MainController {
 
-	ValidationManager manager = ValidationManager.createValidatorStrategyByName(ValidatorStrategy.NORMAL_VALIDATOR.name());
+	ValidationManager manager = ValidationManager.createValidatorStrategyByName(
+			ValidatorStrategy.NORMAL_VALIDATOR.name());
 
 	@RequestMapping(value = {"/addPerson"}, method = RequestMethod.GET)
 	public String showAddPersonPage(Model model) {
